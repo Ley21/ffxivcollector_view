@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{$lang}">
+<html lang="{$lang}" ng-app="ffxivcollectorApp">
 
 <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{$title}</title>
+    <title>{{ 'APP_HEADLINE' | translate }}</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
@@ -25,11 +25,12 @@
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="https://code.angularjs.org/1.6.0/angular-route.min.js"></script>
     <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-    <script src="https://xivdb.com/tooltips.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <!--<script src="https://xivdb.com/tooltips.js"></script>-->
+    <script src="js/script.js"></script>
 </head>
 
-<body style="background-image:url(img/background_3.jpg);background-repeat:no-repeat;background-attachment:fixed">
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular.js"></script>
+<body style="background-image:url(img/background_3.jpg);background-repeat:no-repeat;background-attachment:fixed" ng-controller="mainController"> 
     <div class="">
         <div class="col-md-1"> </div>
         <div class="col-md-10">
@@ -41,7 +42,7 @@
 
 
                         <div class="jumbotron">
-                            <h1>{$title}</h1>
+                            <h1>{{ 'APP_HEADLINE' | translate }}</h1>
                             <p>{$subtitle}</p>
                         </div>
 
@@ -196,6 +197,9 @@
 
                         <div class="rounded_row">
                             <div id="main" style="padding:20px">
+                                <!-- angular templating -->
+                                <!-- this is where content will be injected -->
+                                <div ng-view></div>
                             </div>
                         </div>
                         <div id="updateDB" class="modal fade" tabindex="-1" role="dialog">
