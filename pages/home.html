@@ -1,8 +1,13 @@
 <!-- home.html -->
-<div class="jumbotron text-center">
+<div class="jumbotron">
     <table>
       <tbody ng-repeat="minion in minions">
-        <tr><td translate>minion_{{minion.id}}</td></tr>
+        <tr><td translate>{{'minion_' + minion.id.toString()}}</td></tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody ng-repeat="mount in mounts">
+        <tr><td translate>{{'mount_' + mount.id.toString()}}</td></tr>
       </tbody>
     </table>
 </div>

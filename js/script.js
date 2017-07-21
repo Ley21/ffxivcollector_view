@@ -15,23 +15,37 @@
             
               
     });
-    // create the controller and inject Angular's $scope
-    ffxivcollectorApp.controller('mainController', function($scope,$http) {
-        $http.get('http://ffxivcollector-api-ley21.c9users.io/public/minion/latest').
-            then(function(response) {
-                $scope.minions = response.data;
-            });
-        // create a message to display in our view
-        
-    });
-ffxivcollectorApp.config(function ($translateProvider)   { 
-    $translateProvider.preferredLanguage('de');
-    $translateProvider.useMissingTranslationHandlerLog();
-    $translateProvider.useStaticFilesLoader({
-        prefix: 'lang-',
-        suffix: '.json'
-    });
-    //$translateProvider.useUrlLoader('http://ffxivcollector-api-ley21.c9users.io/public/lang/mount');
-    //$translateProvider.useUrlLoader('http://ffxivcollector-api-ley21.c9users.io/public/lang/minion');
+    ffxivcollectorApp.controller('mainController', ['$translate', '$scope', '$http',
+        function ($translate, $scope,$http) {
+      $scope.changeLanguage = function (langKey) {
+        $translate.use(langKey);
+      };
+      $http.get('http://ffxivcollector-api-ley21.c9users.io/public/minion/latest').
+        then(function(response) {
+            $scope.minions = response.data;
+        });
+    $http.get('http://ffxivcollector-api-ley21.c9users.io/public/mount/latest').
+        then(function(response) {
+            $scope.mounts = response.data;
+        });
+    }]);
     
+ffxivcollectorApp.config(function ($translateProvider)   { 
+    $translateProvider.useMissingTranslationHandlerLog();
+    $translateProvider.usePostCompiling(true);
+    $translateProvider.useStaticFilesLoader({
+            files: [{
+        prefix: 'lang/app-',
+        suffix: '.json'
+    }, {
+        prefix: 'lang/minion-',
+        suffix: '.json'
+    },{
+        prefix: 'lang/mount-',
+        suffix: '.json'
+    } ]});
+    
+    $translateProvider.preferredLanguage('de');
+    $translateProvider.forceAsyncReload(true);
   });
+  
