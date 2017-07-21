@@ -1,7 +1,7 @@
 // script.js
 
     // create the module and name it ffxivcollectorApp
-    var ffxivcollectorApp = angular.module('ffxivcollectorApp', ['ngRoute','pascalprecht.translate']);
+    var ffxivcollectorApp = angular.module('ffxivcollectorApp', ['ngRoute','ui.bootstrap','pascalprecht.translate']);
 
 
     ffxivcollectorApp.config(function($routeProvider) {
@@ -16,17 +16,22 @@
               
     });
     // create the controller and inject Angular's $scope
-    ffxivcollectorApp.controller('mainController', function($scope) {
-
+    ffxivcollectorApp.controller('mainController', function($scope,$http) {
+        $http.get('http://ffxivcollector-api-ley21.c9users.io/public/minion/latest').
+            then(function(response) {
+                $scope.minions = response.data;
+            });
         // create a message to display in our view
-        $scope.message = 'Everyone come and see how good I look!';
+        
     });
+ffxivcollectorApp.config(function ($translateProvider)   { 
+    $translateProvider.preferredLanguage('de');
+    $translateProvider.useMissingTranslationHandlerLog();
+    $translateProvider.useStaticFilesLoader({
+        prefix: 'lang-',
+        suffix: '.json'
+    });
+    //$translateProvider.useUrlLoader('http://ffxivcollector-api-ley21.c9users.io/public/lang/mount');
+    //$translateProvider.useUrlLoader('http://ffxivcollector-api-ley21.c9users.io/public/lang/minion');
     
-ffxivcollectorApp.config(function ($translateProvider) {
-  $translateProvider.useStaticFilesLoader({
-    prefix: 'lang-',
-    suffix: '.json'
   });
-
-  $translateProvider.preferredLanguage('de_DE');
-});

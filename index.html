@@ -7,10 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>{{ 'APP_HEADLINE' | translate }}</title>
+    <title>{{ 'TITLE' | translate }}</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
 
 
 
@@ -22,12 +22,17 @@
     <![endif]-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="bower_components/angular/angular.min.js"></script>
-    <script src="https://code.angularjs.org/1.6.0/angular-route.min.js"></script>
-    <script src="bower_components/angular-translate/angular-translate.min.js"></script>
-    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.6.0/angular-route.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate/angular-translate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
+    <script type="text/javascript" src="bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
     <!--<script src="https://xivdb.com/tooltips.js"></script>-->
-    <script src="js/script.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>
 </head>
 
 <body style="background-image:url(img/background_3.jpg);background-repeat:no-repeat;background-attachment:fixed" ng-controller="mainController"> 
@@ -42,68 +47,59 @@
 
 
                         <div class="jumbotron">
-                            <h1>{{ 'APP_HEADLINE' | translate }}</h1>
-                            <p>{$subtitle}</p>
+                            <h1>{{ 'TITLE' | translate }}</h1>
+                            <p>{{ 'SUBTITLE' | translate }}</p>
                         </div>
 
                         <nav class="navbar navbar-inverse">
                             <div class="container-fluid">
                                 <!-- Brand and toggle get grouped for better mobile display -->
                                 <div class="navbar-header">
-                                    <a class="navbar-brand" href="#">{$home}</a>
+                                    <a class="navbar-brand" href="#">{{ 'HOME' | translate }}</a>
                                 </div>
 
                                 <!-- Collect the nav links, forms, and other content for toggling -->
                                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                                     <ul class="nav navbar-nav">
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          {$dropdown_minions}<span class="caret"></span></a>
+                                        <li class="dropdown" uib-dropdown>
+                                            <a class="dropdown-toggle" uib-dropdown-toggle>
+          {{ 'MINIONS' | translate }}<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                {foreach $methodes.minion as $method} {strip}
-                                                <li><a id='{$method.id}' class='minions_methode'>{$method.name}</a>
-                                                </li>
-                                                {/strip} {/foreach}
-                                                <!--<?php echo create_dropdown_menu("minions"); ?>-->
                                             </ul>
                                         </li>
 
 
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          {$dropdown_mounts}<span class="caret"></span></a>
+                                        <li class="dropdown" uib-dropdown>
+                                            <a class="dropdown-toggle" uib-dropdown-toggle>
+          {{ 'MOUNTS' | translate }}<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                {foreach $methodes.mount as $method} {strip}
-                                                <li><a id='{$method.id}' class='mounts_methode'>{$method.name}</a>
-                                                </li>
-                                                {/strip} {/foreach}
                                             </ul>
                                         </li>
-
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          {$ranking}<span class="caret"></span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a id='all' class='ranking_dropdown'>{$all}</a>
+                                        <li class="dropdown" uib-dropdown>
+                                            <a class="dropdown-toggle" uib-dropdown-toggle>
+                                                <i class="fa fa-cogs"></i> {{ 'RANKING' | translate }} <span class="caret"></span>
+                                            </a>
+                                            <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="ranking-dropdown">
+                                              <li><a id='all'>{{ 'ALL' | translate }}</a>
                                                 </li>
-                                                <li><a id='minions' class='ranking_dropdown'>{$minions}</a>
+                                                <li><a id='minions'>{{ 'MINIONS' | translate }}</a>
                                                 </li>
-                                                <li><a id='mounts' class='ranking_dropdown'>{$mounts}</a>
+                                                <li><a id='mounts'>{{ 'MOUNTS' | translate }}</a>
                                                 <li role="separator" class="divider"></li>
-                                                <li class="dropdown-header">{$rarity}</li>
+                                                <li class="dropdown-header">{{ 'RARITY' | translate }}</li>
                                                 </li>
-                                                <li><a id='rarity_all' class='ranking_dropdown'>{$all}</a>
-                                                <li><a id='rarity_minions' class='ranking_dropdown'>{$minions}</a>
-                                                <li><a id='rarity_mounts' class='ranking_dropdown'>{$mounts}</a>
+                                                <li><a id='rarity_all'>{{ 'ALL' | translate }}</a>
+                                                <li><a id='rarity_minions'>{{ 'MINIONS' | translate }}</a>
+                                                <li><a id='rarity_mounts'>{{ 'MOUNTS' | translate }}</a>
                                                 </li>
-                                            </ul>
+                                          </ul>
                                         </li>
-                                        <li><a id='faq'>FAQ</a>
+                                        <li><a id='faq'>{{ 'HELP' | translate }}</a>
                                         </li>
                                     </ul>
                                     <form id="char_search" class="navbar-form navbar-left form-inline" action="charakter.php" method="get">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="{$char_search_placeholder}" name="name">
+                                            <input type="text" class="form-control" placeholder="{{ 'CHARACTER_NAME' | translate }}" name="name">
                                             <select class="form-control" name="server">
                                                 <option value="Adamantoise">Adamantoise</option>
                                                 <option value="Aegis">Aegis</option>
@@ -172,7 +168,7 @@
                                                 <option value="Zeromus">Zeromus</option>
                                                 <option value="Zodiark">Zodiark</option>
                                             </select>
-                                            <button type="submit" class="btn btn-default">{$search}</button>
+                                            <button type="submit" class="btn btn-default">{{ 'SEARCH' | translate }}</button>
                                         </div>
                                     </form>
 
@@ -202,57 +198,11 @@
                                 <div ng-view></div>
                             </div>
                         </div>
-                        <div id="updateDB" class="modal fade" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title">Update database from xivdb</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" id="update_button" class="btn btn-primary">Update</button>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
                         
-
-                        <div id="request" class="modal fade" tabindex="-1" role="dialog">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title">Request a change for an object</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p></p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" id="send_button" class="btn btn-primary disabled">Send</button>
-                                    </div>
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                        <!-- /.modal -->
                         <footer style="background-color:rgba(255, 255, 255, 0.5);" class="rounded">
                             </br>
                             <p class="text-center">FFXIV Collector: © 2016-2017 Andreas Heyert (<a href='/char?id=2215586'>Ley Sego</a> on Shiva)</p>
                             <p class="text-center">Project on GitHub <a href='https://github.com/Ley21/ffxiv_minions'>Ley21/ffxiv_minions</a>.</p>
-                            <p class="text-center">
-                                <a data-toggle="modal" data-target="#updateDB">Update</a> - <a data-toggle="modal" data-target="#request">Request Change</a> - Today updated characters: {$count_today}
-                            
-                            </p>
                             <p class="text-center">FINAL FANTASY is a registered trademark of Square Enix Holdings Co., Ltd.</br>FINAL FANTASY XIV © 2010-2016 SQUARE ENIX CO., LTD. All Rights Reserved.</p>
 
                         </footer>

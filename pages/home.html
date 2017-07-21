@@ -1,7 +1,9 @@
 <!-- home.html -->
 <div class="jumbotron text-center">
-    <h1>Home Page</h1>
-
-    <p>{{ message }}</p>
+    <table>
+      <tbody ng-repeat="minion in minions">
+        <tr><td translate>minion_{{minion.id}}</td></tr>
+      </tbody>
+    </table>
 </div>
 
